@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  /* Improve text visibility in dark mode */
+  .dark .text-muted-foreground {
+    @apply text-opacity-80;
+  }
+  
+  .dark .card,
+  .dark .task-card {
+    @apply text-white text-opacity-90;
+  }
+  
+  .dark .form-description,
+  .dark .text-description {
+    @apply text-white text-opacity-80;
+  }
+}
