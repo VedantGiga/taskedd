@@ -3,7 +3,7 @@ services:
     name: taskflow-app
     env: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: ./build.sh
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

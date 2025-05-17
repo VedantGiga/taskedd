@@ -43,6 +43,8 @@ Render Blueprints allow you to deploy your entire infrastructure defined in `ren
 3. Render will detect the `render.yaml` file and show you the resources it will create
 4. Click "Apply" to create the resources
 
+Note: The deployment uses a custom build script (`build.sh`) that handles the build process. This script ensures that all the necessary build tools are available during deployment.
+
 ### 4. Alternative: Manual Web Service Setup
 
 If you prefer to set up manually instead of using the Blueprint:
@@ -54,7 +56,7 @@ If you prefer to set up manually instead of using the Blueprint:
    - Environment: Node
    - Region: Choose the closest to your location
    - Branch: main (or your default branch)
-   - Build Command: `npm install && npm run build`
+   - Build Command: `./build.sh`
    - Start Command: `npm start`
    - Plan: Free
 4. Under "Advanced" settings, add the following environment variables:
