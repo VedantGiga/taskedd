@@ -19,4 +19,8 @@ npx vite build --config vite.config.js
 echo "Building server..."
 npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
 
+# Ensure theme CSS is properly included
+echo "Ensuring theme CSS is properly included..."
+node ensure-theme.js
+
 echo "Build completed successfully!"

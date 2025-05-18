@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>TaskFlow - Smart Task Management</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Theme script to prevent flashing -->
+    <script>
+      // This script runs before React loads to prevent theme flashing
+      (function() {
+        try {
+          // Try to get the theme from localStorage
+          const storedTheme = localStorage.getItem('taskflow-theme');
+
+          // Apply the theme immediately
+          if (storedTheme === 'dark' ||
+              (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch (e) {
+          // Fallback if localStorage is not available
+          console.error('Theme script error:', e);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

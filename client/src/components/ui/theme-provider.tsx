@@ -37,18 +37,51 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
+    // First, remove both classes
     root.classList.remove("light", "dark");
 
+    // Determine the theme to apply
+    let themeToApply = theme;
+
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      themeToApply = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
-
-      root.classList.add(systemTheme);
-      return;
     }
 
-    root.classList.add(theme);
+    // Apply the theme class
+    root.classList.add(themeToApply);
+
+    // Also set a data attribute for additional CSS targeting
+    root.setAttribute("data-theme", themeToApply);
+
+    // Store the applied theme for debugging
+    if (typeof window !== 'undefined') {
+      window.__THEME_APPLIED = themeToApply;
+    }
+  }, [theme]);
+
+  // Add a listener for system theme changes
+  useEffect(() => {
+    if (theme !== "system") return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleChange = () => {
+      const root = window.document.documentElement;
+      const systemTheme = mediaQuery.matches ? "dark" : "light";
+
+      root.classList.remove("light", "dark");
+      root.classList.add(systemTheme);
+      root.setAttribute("data-theme", systemTheme);
+
+      if (typeof window !== 'undefined') {
+        window.__THEME_APPLIED = systemTheme;
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, [theme]);
 
   const value = {

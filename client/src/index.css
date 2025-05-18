@@ -10,19 +10,41 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  
+
   /* Improve text visibility in dark mode */
   .dark .text-muted-foreground {
     @apply text-opacity-80;
   }
-  
+
   .dark .card,
   .dark .task-card {
     @apply text-white text-opacity-90;
   }
-  
+
   .dark .form-description,
   .dark .text-description {
     @apply text-white text-opacity-80;
+  }
+
+  /* Force dark mode styles */
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  html[data-theme="dark"] body {
+    @apply bg-[#121212] text-white;
+  }
+
+  /* Additional dark mode overrides */
+  html[data-theme="dark"] .bg-background {
+    @apply bg-[#121212];
+  }
+
+  html[data-theme="dark"] .text-foreground {
+    @apply text-white;
+  }
+
+  html[data-theme="dark"] .border-border {
+    @apply border-gray-700;
   }
 }
