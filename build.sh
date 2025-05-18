@@ -7,9 +7,13 @@ set -e
 echo "Installing dependencies..."
 npm install
 
+# Ensure vite is installed globally for the build
+echo "Installing vite globally..."
+npm install -g vite
+
 # Build the client
 echo "Building client..."
-npx vite build
+npx vite build --config vite.config.js
 
 # Build the server
 echo "Building server..."
